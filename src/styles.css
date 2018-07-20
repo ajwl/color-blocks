@@ -1,0 +1,49 @@
+
+body {
+  font-family: sans-serif;
+}
+
+canvas {
+  display: block;
+  margin-bottom: 1em;
+}
+
+h1 {
+  color: red;
+}
+
+
+.container-block {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.container-line {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.canvas-holder {
+  margin-right: 2em;
+  flex: auto 1 1;
+}
+
+.canvas-holder a {
+  font-weight: 500;
+  border: 1px solid black;
+  background-color: #cabfbf;
+  padding: 2px 3px;
+  text-decoration: none;
+}
+
+.canvas-holder a.available {
+  background-color: #f98e52;
+  cursor: pointer;
+}
+
+.canvas-holder a.available:hover,
+ .canvas-holder a.available:active {
+  color: white;
+}
