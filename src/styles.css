@@ -36,7 +36,6 @@ h1 {
   background-color: #cabfbf;
   padding: 2px 3px;
   text-decoration: none;
-  margin: 1em 0;
 }
 
 .canvas-holder a.available {
@@ -47,4 +46,7 @@ h1 {
 .canvas-holder a.available:hover,
  .canvas-holder a.available:active {
   color: white;
+}
+canvas {
+    margin-bottom: 1em;
 }
