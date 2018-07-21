@@ -6,12 +6,21 @@ body {
 canvas {
   display: block;
   margin-bottom: 1em;
+  margin-top: 1em;
 }
 
 h1 {
   color: red;
 }
 
+button#run-analysis {
+  background-color: red;
+  color: white;
+  padding: .5em;
+  font-weight: 500;
+  font-size: 1.1em;
+  cursor: pointer;
+}
 
 .container-block {
   display: flex;
@@ -47,6 +56,9 @@ h1 {
  .canvas-holder a.available:active {
   color: white;
 }
-canvas {
-    margin-bottom: 1em;
+
+@media (max-width: 700px) {
+  .container-block {
+    flex-direction: column;
+  }
 }
