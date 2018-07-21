@@ -36,6 +36,7 @@ h1 {
   background-color: #cabfbf;
   padding: 2px 3px;
   text-decoration: none;
+  margin: 1em 0;
 }
 
 .canvas-holder a.available {
