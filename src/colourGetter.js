@@ -1,4 +1,4 @@
-import {sortLightness, sortBrightness} from './sorter.js'
+import {sortLightness, sortBrightness} from './colourSorter.js'
 
 export const getPixelData = (ctx, blockHeight, blockWidth, height, width, colorProp) => {
   let vcBlock = blockHeight / 2

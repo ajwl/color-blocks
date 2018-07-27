@@ -7,24 +7,20 @@
   <body>
     <main>
       <h1>Leedale's blocks</h1>
+
+      <div>
+        <input type="file" id="photo-submitter" name="file" multiple="false">
+      </div>
+
       <button id="run-analysis"> Get my colours </button>
 
       <div class="container-block">
         <div class="canvas-holder one">
           <h2>Original</h2>
-          <p></p>
+          <img id="testimage" src=""/>
           <canvas id="canvas"></canvas>
         </div>
 
-        <!-- <form method="post" enctype="multipart/form-data">
-          <div>
-            <label for="file">Choose an image to upload</label>
-            <input type="file" id="file" name="file" multiple>
-          </div>
-          <div>
-            <button>Upload</button>
-          </div>
-        </form> -->
 
         <div class="canvas-holder block">
           <h2>Lightness</h2>
