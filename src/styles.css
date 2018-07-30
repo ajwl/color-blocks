@@ -13,14 +13,18 @@ h1 {
   color: red;
 }
 
+input#photo-submitter,
 button#run-analysis {
-  background-color: red;
-  color: white;
   padding: .5em;
   font-weight: 500;
   font-size: 1.1em;
   cursor: pointer;
   margin-bottom: 1em;
+}
+
+button#run-analysis {
+  background-color: red;
+  color: white;
 }
 
 .container-block {

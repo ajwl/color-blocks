@@ -17,11 +17,7 @@ const blockHeight = 31.25;
 const hLine = blockHeight;
 const wLine = blockWidth * 144; // number of blocks
 
-let filename = "sunset-1"
-let sourceImg = img;
-
 const init = () => {
-  setUpFirstCanvas();
   fileSelector();
 }
 
@@ -37,14 +33,15 @@ const fileSelector = () => {
 const mountFile = (e) => {
   let file = e.target.files[0];
   var reader  = new FileReader();
-  let testimage = document.getElementById('testimage')
+  let ctx = canvasSetUp('canvas', height, width);
+  let img = new Image();
 
-  reader.addEventListener('load',() => {
-    testimage.src = reader.result;
-  },false);
-  if (file) {
-    reader.readAsDataURL(file);
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0, width, height);
+    URL.revokeObjectURL(img.src)
   }
+  img.src = URL.createObjectURL(file);
+  // localStorage.setItem( "savedImageData", canvas.toDataURL("blocks1/png") );
   drawer()
 }
 
