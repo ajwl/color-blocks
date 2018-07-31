@@ -1,5 +1,6 @@
+import {setupDownloadButton} from "./filehandler.js"
 
-export const drawerOutput = (origColors, height, width, id, blockHeight, blockWidth) => {
+export const drawerOutput = (origColors, height, width, id, blockHeight, blockWidth, filename) => {
   let ctx = canvasSetUp(id, height, width);
   let x = 0;
   let y = 0;

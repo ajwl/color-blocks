@@ -1,5 +1,5 @@
 import {getPixelData} from "./colourGetter.js"
-import {setupDownloadButton} from "./filehandler.js"
+
 import {canvasSetUp, drawerOutput} from "./colorDrawer.js"
 import './styles.css'
 import img from  "./blocks1.png"
@@ -32,40 +32,25 @@ const fileSelector = () => {
 
 const mountFile = (e) => {
   let file = e.target.files[0];
-  var reader  = new FileReader();
+  let filename = file.name;
+  let reader  = new FileReader();
   let ctx = canvasSetUp('canvas', height, width);
   let img = new Image();
+  img.crossorigin = 'anonymous';
 
   img.onload = () => {
     ctx.drawImage(img, 0, 0, width, height);
     URL.revokeObjectURL(img.src)
   }
   img.src = URL.createObjectURL(file);
-  // localStorage.setItem( "savedImageData", canvas.toDataURL("blocks1/png") );
-  drawer()
+  drawer(ctx, filename)
 }
 
-const setUpFirstCanvas = () => {
-  let ctx = canvasSetUp('canvas', height, width);
-}
-
-const drawer = () => {
-  let img = new Image();
-  img.crossorigin = 'anonymous';
-
-  img.addEventListener('load', () => {
-    makeImage();
-  }, false);
-
-  function makeImage(){
-    ctx.drawImage(img, 0, 0, width, height);
-    localStorage.setItem( "savedImageData", canvas.toDataURL("blocks1/png") );
-  }
-
+const drawer = (ctx, filename) => {
   const button = document.getElementById("run-analysis")
   button.addEventListener('click', () => {
-    const origColorsL = getPixelData(ctx, blockHeight, blockWidth, height, width, "l");
-    const origColorsB = getPixelData(ctx, blockHeight, blockWidth, height, width, "v");
+    const origColorsL = getPixelData(ctx, blockHeight, blockWidth, height, width, "l", filename);
+    const origColorsB = getPixelData(ctx, blockHeight, blockWidth, height, width, "v", filename);
     createNewCanvases(origColorsL, origColorsB);
   }, false);
 }

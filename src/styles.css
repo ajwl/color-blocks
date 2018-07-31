@@ -13,7 +13,21 @@ h1 {
   color: red;
 }
 
-input#photo-submitter,
+div.upload-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+
+div.upload-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+button.photo-submitter,
 button#run-analysis {
   padding: .5em;
   font-weight: 500;
@@ -25,6 +39,17 @@ button#run-analysis {
 button#run-analysis {
   background-color: red;
   color: white;
+}
+button#run-analysis:hover{
+  background-color: #bd2c23;
+}
+
+button.photo-submitter {
+  background-color: purple;
+  color: white;
+}
+button.photo-submitter:hover {
+  background-color: #3e153e;
 }
 
 .container-block {
