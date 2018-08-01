@@ -1,13 +1,11 @@
 import {getPixelData} from "./colourGetter.js"
-
 import {canvasSetUp, drawerOutput} from "./colorDrawer.js"
 import './styles.css'
-import img from  "./blocks1.png"
 
 //image - 16 blocks high, 9 wide - each block 31.25 high,
 // https://ourcodeworld.com/articles/read/185/how-to-get-the-pixel-color-from-a-canvas-on-click-or-mouse-event-with-javascript
-const height = 500;
-const width = 300;
+const height = 400;
+const width = 400;
 const verticalBlocks = 16;
 const horizontalBlocks = 9;
 
@@ -39,11 +37,29 @@ const mountFile = (e) => {
   img.crossorigin = 'anonymous';
 
   img.onload = () => {
-    ctx.drawImage(img, 0, 0, width, height);
+    let [w, h] = scale(img.width, img.height)
+    // ctx.height = h;
+    // ctx.width = w;
+    ctx.drawImage(img, 0, 0, w, h);
     URL.revokeObjectURL(img.src)
+    drawer(ctx, filename)
   }
   img.src = URL.createObjectURL(file);
-  drawer(ctx, filename)
+
+}
+
+const scale = (w, h) => {
+  const whratio = h / w;
+  if(whratio < 1){
+    let w1 = width;
+    let h1 = w1 * whratio;
+    return [w1, h1]
+  }
+  else {
+    let h1 = height;
+    let w1 = h1 / whratio;
+    return [w1, h1];
+  }
 }
 
 const drawer = (ctx, filename) => {

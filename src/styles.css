@@ -48,7 +48,7 @@ button.photo-submitter {
   background-color: purple;
   color: white;
 }
-button.photo-submitter:hover {
+input[type=file]:hover + button.photo-submitter {
   background-color: #3e153e;
 }
 
