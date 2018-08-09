@@ -34,7 +34,6 @@ export const drawerOutput = (origColors, height, width, id, blockHeight, blockWi
   setupDownloadButton(id, filename);
 }
 
-
 export const canvasSetUp = (id, h, w) => {
   const cvs = document.getElementById(id)
   cvs.height = h;

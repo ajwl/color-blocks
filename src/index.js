@@ -2,18 +2,11 @@ import {getPixelData} from "./colourGetter.js"
 import {canvasSetUp, drawerOutput} from "./colorDrawer.js"
 import './styles.css'
 
-//image - 16 blocks high, 9 wide - each block 31.25 high,
 // https://ourcodeworld.com/articles/read/185/how-to-get-the-pixel-color-from-a-canvas-on-click-or-mouse-event-with-javascript
+
 const height = 400;
 const width = 400;
-const verticalBlocks = 16;
-const horizontalBlocks = 9;
-
-const blockWidth = 33.33333;
-const blockHeight = 31.25;
-
-const hLine = blockHeight;
-const wLine = blockWidth * 144; // number of blocks
+const standardBlock = 25;
 
 const init = () => {
   fileSelector();
@@ -38,14 +31,48 @@ const mountFile = (e) => {
 
   img.onload = () => {
     let [w, h] = scale(img.width, img.height)
-    // ctx.height = h;
-    // ctx.width = w;
     ctx.drawImage(img, 0, 0, w, h);
     URL.revokeObjectURL(img.src)
-    drawer(ctx, filename)
+    drawer(ctx, filename, {w, h})
   }
   img.src = URL.createObjectURL(file);
+}
 
+const drawer = (ctx, filename, conf) => {
+  const button = document.getElementById("run-analysis")
+  button.addEventListener('click', () => {
+    const origColorsL = getPixelData(ctx, standardBlock, standardBlock, conf.h, conf.w, "l", filename);
+    const origColorsB = getPixelData(ctx, standardBlock, standardBlock, conf.h, conf.w, "v", filename); // v is the v in hsv aka brightness
+    createNewCanvases(origColorsL, origColorsB, conf);
+  }, false);
+}
+
+const createNewCanvases = (origColorsL, origColorsB, conf) => {
+
+  let wLine = findBlockNumber(conf.w, conf.h) * standardBlock;
+
+  // block canvases
+  drawerOutput(origColorsL, conf.h, conf.w, 'blockLightness', standardBlock, standardBlock);
+  drawerOutput(origColorsB, conf.h, conf.w, 'blockBrightness', standardBlock, standardBlock);
+
+  // line canvases
+  drawerOutput(origColorsL, standardBlock, wLine, 'lineLightness', standardBlock, standardBlock);
+  drawerOutput(origColorsB, standardBlock, wLine, 'lineBrightness', standardBlock, standardBlock);
+}
+
+const findBlockNumber = (w, h) => {
+  let horizontalBlocks;
+  let verticalBlocks;
+  if(w > h) {
+    horizontalBlocks = 15;
+    verticalBlocks = h / standardBlock;
+  } else {
+    horizontalBlocks = w / standardBlock;
+    verticalBlocks = 15;
+  }
+  let numBlocks = verticalBlocks * horizontalBlocks;
+  console.log(numBlocks)
+  return (numBlocks);
 }
 
 const scale = (w, h) => {
@@ -60,25 +87,6 @@ const scale = (w, h) => {
     let w1 = h1 / whratio;
     return [w1, h1];
   }
-}
-
-const drawer = (ctx, filename) => {
-  const button = document.getElementById("run-analysis")
-  button.addEventListener('click', () => {
-    const origColorsL = getPixelData(ctx, blockHeight, blockWidth, height, width, "l", filename);
-    const origColorsB = getPixelData(ctx, blockHeight, blockWidth, height, width, "v", filename);
-    createNewCanvases(origColorsL, origColorsB);
-  }, false);
-}
-
-const createNewCanvases = (origColorsL, origColorsB) => {
-  // block canvases
-  drawerOutput(origColorsL, height, width, 'blockLightness', blockHeight, blockWidth);
-  drawerOutput(origColorsB, height, width, 'blockBrightness', blockHeight, blockWidth); // v is the v in hsv aka brightness
-
-  // line canvases
-  drawerOutput(origColorsL, hLine, wLine, 'lineLightness', blockHeight, blockWidth);
-  drawerOutput(origColorsB, hLine, wLine, 'lineBrightness', blockHeight, blockWidth);
 }
 
 window.onload = () => {

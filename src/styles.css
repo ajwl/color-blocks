@@ -14,20 +14,22 @@ h1 {
 }
 
 div.upload-wrapper {
-  position: relative;
   overflow: hidden;
   display: block;
+  margin-bottom: .5em;
 }
 
 div.upload-wrapper input[type=file] {
-  font-size: 100px;
+  height: 0.1px;
+  width: 0.1px;
   position: absolute;
+  overflow: hidden;
   left: 0;
   top: 0;
   opacity: 0;
 }
 
-button.photo-submitter,
+label.photo,
 button#run-analysis {
   padding: .5em;
   font-weight: 500;
@@ -44,12 +46,14 @@ button#run-analysis:hover{
   background-color: #bd2c23;
 }
 
-button.photo-submitter {
+label.photo {
   background-color: purple;
   color: white;
+  line-height: 2.2em;
 }
-input[type=file]:hover + button.photo-submitter {
+input[type=file]:hover + label.photo {
   background-color: #3e153e;
+  cursor: pointer;
 }
 
 .container-block {
