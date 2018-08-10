@@ -1,6 +1,0 @@
-
-#Run the app
-
-Dev mode: `npm run start` starts webpack dev server and runs webpack in watch mode.
-
-To build: `npm run build`

@@ -28,7 +28,7 @@ export const drawerOutput = (origColors, height, width, id, blockHeight, blockWi
       if(origColors[i]){
         ctx.fillStyle = `rgb(${origColors[i].r}, ${origColors[i].g}, ${origColors[i].b})`
       } else {
-        ctx.fillStyle = 'green'
+        ctx.fillStyle = 'white';
       }
   })
   setupDownloadButton(id, filename);

@@ -8,6 +8,10 @@ const height = 400;
 const width = 400;
 const standardBlock = 25;
 
+const mainBox = document.querySelector('main');
+const uploadLabel = document.querySelector('label.photo');
+const windowWidth = window.outerWidth;
+
 const init = () => {
   fileSelector();
 }
@@ -28,23 +32,39 @@ const mountFile = (e) => {
   let ctx = canvasSetUp('canvas', height, width);
   let img = new Image();
   img.crossorigin = 'anonymous';
+  img.correctOrientation = true;
 
   img.onload = () => {
     let [w, h] = scale(img.width, img.height)
     ctx.drawImage(img, 0, 0, w, h);
     URL.revokeObjectURL(img.src)
     drawer(ctx, filename, {w, h})
+    mainBox.classList.add('photo-uploaded');
   }
   img.src = URL.createObjectURL(file);
 }
 
 const drawer = (ctx, filename, conf) => {
   const button = document.getElementById("run-analysis")
-  button.addEventListener('click', () => {
-    const origColorsL = getPixelData(ctx, standardBlock, standardBlock, conf.h, conf.w, "l", filename);
-    const origColorsB = getPixelData(ctx, standardBlock, standardBlock, conf.h, conf.w, "v", filename); // v is the v in hsv aka brightness
-    createNewCanvases(origColorsL, origColorsB, conf);
-  }, false);
+  button.addEventListener(
+    'click',
+    () => {
+      const origColorsL = getPixelData(ctx, standardBlock, standardBlock, conf.h, conf.w, "l", filename);
+      const origColorsB = getPixelData(ctx, standardBlock, standardBlock, conf.h, conf.w, "v", filename); // v is the v in hsv aka brightness
+      createNewCanvases(origColorsL, origColorsB, conf);
+      showColourOptions();
+    },
+    false
+  );
+}
+
+const showColourOptions = () => {
+  mainBox.classList.add('get-colours');
+  uploadLabel.textContent = '1. Upload another photo';
+  console.log("windowwidth", windowWidth);
+  if (windowWidth < 400) {
+    mainBox.scrollTo(0, 600);
+  }
 }
 
 const createNewCanvases = (origColorsL, origColorsB, conf) => {
@@ -71,7 +91,6 @@ const findBlockNumber = (w, h) => {
     verticalBlocks = 15;
   }
   let numBlocks = verticalBlocks * horizontalBlocks;
-  console.log(numBlocks)
   return (numBlocks);
 }
 

@@ -5,53 +5,46 @@
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <main>
+    <main class="no-photo">
       <h1>Leedale's blocks</h1>
 
       <div class="upload-wrapper">
         <input type="file" id="photo-submitter" name="file" multiple="false" accept="image/*">
-        <label class="photo" for="photo-submitter">Upload a photo</label>
+        <label class="photo" for="photo-submitter">1. Upload a photo</label>
       </div>
 
-      <button id="run-analysis"> Get my colours </button>
+      <div class="get-colours-wrapper">
+        <button id="run-analysis">2. Get colours </button>
+      </div>
 
       <div class="container-block">
         <div class="canvas-holder one">
-          <h2>Original</h2>
-          <img id="testimage" src=""/>
           <canvas id="canvas"></canvas>
         </div>
 
-
         <div class="canvas-holder block">
-          <h2>Lightness</h2>
-          <a id="blockLightness-download">Download</a>
           <canvas id="blockLightness"></canvas>
+          <p><a id="blockLightness-download">Download</a> sorted by lightness</p>
         </div>
 
         <div class="canvas-holder block">
-          <h2>Brightness</h2>
-          <a id="blockBrightness-download">Download</a>
           <canvas id="blockBrightness"></canvas>
+          <p><a id="blockBrightness-download">Download</a> sorted by brightness</p>
         </div>
       </div>
-
 
       <div class="container-line">
-
         <div class="canvas-holder line">
-          <h2>Lightness (line)</h2>
-          <a id="lineLightness-download">Download</a>
           <canvas id="lineLightness"></canvas>
+          <p><a id="lineLightness-download">Download</a> sorted by lightness (line) </p>
         </div>
 
         <div class="canvas-holder line">
-          <h2>Brightness (line)</h2>
-          <a id="lineBrightness-download">Download</a>
           <canvas id="lineBrightness"></canvas>
+          <p><a id="lineBrightness-download">Download</a> sorted by brightness (line)</p>
         </div>
-
       </div>
+
       <small> A collaboration between leedale and ajwl - code on <a href="https://github.com/ajwl/color-blocks" target="_blank">github</a></small>
     </main>
 
