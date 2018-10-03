@@ -11,4 +11,6 @@ This came about from a conversation with my photographer friend who is intereste
 
 Dev mode: `npm run start` starts webpack dev server and runs webpack in watch mode.
 
+To get the express routing to work, start the node server in a new tab: `node server.js`
+
 To build: `npm run build`

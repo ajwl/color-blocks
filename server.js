@@ -9,7 +9,8 @@ var app = express();
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('/batch', function(req, res){
-    res.send("helooooo")
+  console.log("this ran successfully");
+    res.sendFile(path.join(__dirname + '/dist/batch.html'))
 })
 app.set('port', process.env.PORT || 8080);
 

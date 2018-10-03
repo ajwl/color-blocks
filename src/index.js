@@ -1,7 +1,12 @@
 import {init} from "./main.js";
+import {batchInit} from "./batch.js";
 
 window.onload = () => {
-  console.log("hi")
-  console.log(typeof init);
-    init();
+  const batchContainer = document.querySelector('#batch-container');
+    if(batchContainer){
+      console.log("batch option ran");
+      batchInit();
+    } else {
+      init();
+    }
 };

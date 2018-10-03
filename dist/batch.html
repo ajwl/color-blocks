@@ -6,8 +6,10 @@
   </head>
   <body>
     <main class="no-photo">
-      <h1>Solistice to Solistice</h1>
+      <h1>Colour blocks - multiple upload</h1>
       <p>Upload multiple photos and create lines ordered by lightness. </p>
+
+      <p><a href="/"> Back to home >> </a></p>
 
       <div class="upload-wrapper">
         <input type="file" id="photo-submitter" name="file" multiple="true" accept="image/*">
@@ -18,20 +20,22 @@
         <button id="run-analysis">2. Get colours </button>
       </div>
 
-      <div class="container-block">
-        <div class="canvas-holder one">
+      <div id="batch-container" class="container-block">
+        <!-- <div class="canvas-holder">
           <canvas id="canvas"></canvas>
-        </div>
+        </div> -->
       </div>
 
-      <div class="container-line">
-        <div class="canvas-holder line">
+      <div id="batch-container-line">
+        <!-- <div class="canvas-holder line">
           <canvas id="lineLightness"></canvas>
           <p><a id="lineLightness-download">Download</a> sorted by lightness (line) </p>
-        </div>
+        </div> -->
       </div>
 
-      <small> A collaboration between leedale and ajwl - code on <a href="https://github.com/ajwl/color-blocks" target="_blank">github</a></small>
+      <small> A collaboration between leedale and ajwl - code on
+        <a href="https://github.com/ajwl/color-blocks" target="_blank">github</a>
+      </small>
     </main>
 
     <script type="text/javascript" src="./output.js"></script>

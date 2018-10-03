@@ -7,13 +7,13 @@
   </head>
   <body>
     <main class="no-photo">
-      <h1>Colour blocker</h1>
-      <p>This app colour samples and sorts photographs.</p>
-      <p><a href="">Sample multiple photos at one time.</a></p>
+      <h1>Color blocks</h1>
+      <p>This app samples and sorts colours in photographs.</p>
+      <p>It was created for the Solistice to Solistice project.</p>
 
       <div class="upload-wrapper">
         <input type="file" id="photo-submitter" name="file" multiple="false" accept="image/*">
-        <label class="photo" for="photo-submitter">1. Upload a photo</label>
+        <label class="photo" for="photo-submitter">1. Upload one or more photo</label>
       </div>
 
       <div class="get-colours-wrapper">
@@ -21,29 +21,24 @@
       </div>
 
       <div class="container-block">
-        <div class="canvas-holder one">
-          <canvas id="canvas"></canvas>
+        <div id="image-holder">
         </div>
 
-        <div class="canvas-holder block">
-          <canvas id="blockLightness"></canvas>
+        <div id="blockLightness" class="canvas-holder block">
           <p><a id="blockLightness-download">Download</a> sorted by lightness</p>
         </div>
 
-        <div class="canvas-holder block">
-          <canvas id="blockBrightness"></canvas>
+        <div id="blockBrightness" class="canvas-holder block">
           <p><a id="blockBrightness-download">Download</a> sorted by brightness</p>
         </div>
       </div>
 
       <div class="container-line">
-        <div class="canvas-holder line">
-          <canvas id="lineLightness"></canvas>
+        <div id="lineLightness" class="canvas-holder line">
           <p><a id="lineLightness-download">Download</a> sorted by lightness (line) </p>
         </div>
 
-        <div class="canvas-holder line">
-          <canvas id="lineBrightness"></canvas>
+        <div id="lineBrightness" class="canvas-holder line">
           <p><a id="lineBrightness-download">Download</a> sorted by brightness (line)</p>
         </div>
       </div>

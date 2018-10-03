@@ -4,7 +4,6 @@ import {scale, findBlockNumber} from "./utils.js"
 import './styles.css'
 
 // https://ourcodeworld.com/articles/read/185/how-to-get-the-pixel-color-from-a-canvas-on-click-or-mouse-event-with-javascript
-
 const maxHeight = 400;
 const maxWidth = 400;
 const standardBlock = 25;
@@ -23,19 +22,19 @@ const fileSelector = () => {
 }
 
 const checkFiles = (e) => {
-  let submitted = e.target.files;
-  if(submitted.length > 1) {
-    submitted.forEach(file => mountFile(file, true));
-  }
-  else if(submitted.length === 1){
-    mountFile(submitted[0], false)
-  }
+  let submitted = Array.from(e.target.files);
+  console.log("submitted", submitted.length);
+  let isMultiple = submitted.length > 1;
+  submitted.forEach(file => {
+    console.log(file);
+    mountFile(file, isMultiple)
+  });
 }
 
 const mountFile = (file, lineOnly) => {
   let filename = file.name;
   let reader  = new FileReader();
-  let ctx = canvasSetUp('canvas', maxHeight, maxWidth);
+  let ctx = canvasSetUp('image-holder', maxHeight, maxWidth);
   let img = new Image();
   img.crossorigin = 'anonymous';
   img.correctOrientation = true;
@@ -55,13 +54,31 @@ const drawer = (ctx, filename, conf) => {
   button.addEventListener(
     'click',
     () => {
-      const origColorsL = getPixelData(ctx, standardBlock, standardBlock, conf.h, conf.w, "l", filename);
-      const origColorsB = getPixelData(ctx, standardBlock, standardBlock, conf.h, conf.w, "v", filename); // v is the v in hsv aka brightness
-      createNewCanvases(origColorsL, origColorsB, conf);
-      showColourOptions();
+        if(conf.lineOnly) {
+          drawerAll(ctx, filename, conf)
+        } else {
+          drawerLineOnly(ctx, filename, conf)
+        }
     },
     false
   );
+}
+
+const drawerAll = (ctx, filename, conf) => {
+  const origColorsL = getPixelData(ctx, standardBlock, standardBlock, conf.h, conf.w, "l", filename);
+  const origColorsB = getPixelData(ctx, standardBlock, standardBlock, conf.h, conf.w, "v", filename); // v is the v in hsv aka brightness
+  conf.origColorsL = origColorsL;
+  conf.origColorsB = origColorsB;
+  createNewCanvases(conf);
+  showColourOptions();
+}
+
+const drawerLineOnly = (ctx, filename, conf) => {
+  const origColorsL = getPixelData(ctx, standardBlock, standardBlock, conf.h, conf.w, "l", filename);
+  conf.origColorsL = origColorsL;
+  conf.origColorsB = [];
+  createNewCanvases(conf);
+  showColourOptions();
 }
 
 const showColourOptions = () => {
@@ -72,19 +89,19 @@ const showColourOptions = () => {
   }
 }
 
-const createNewCanvases = (origColorsL, origColorsB, conf) => {
+const createNewCanvases = (conf) => {
   let wLine = findBlockNumber(conf.w, conf.h, standardBlock) * standardBlock;
 
   if(conf.lineOnly){
-      drawerOutput(origColorsL, standardBlock, wLine, 'lineLightness', standardBlock, standardBlock);
+      drawerOutput(conf.origColorsL, standardBlock, wLine, 'lineLightness', standardBlock, standardBlock);
   } else {
     // block canvases
-    drawerOutput(origColorsL, conf.h, conf.w, 'blockLightness', standardBlock, standardBlock);
-    drawerOutput(origColorsB, conf.h, conf.w, 'blockBrightness', standardBlock, standardBlock);
+    drawerOutput(conf.origColorsL, conf.h, conf.w, 'blockLightness', standardBlock, standardBlock);
+    drawerOutput(conf.origColorsB, conf.h, conf.w, 'blockBrightness', standardBlock, standardBlock);
 
     // line canvases
-    drawerOutput(origColorsL, standardBlock, wLine, 'lineLightness', standardBlock, standardBlock);
-    drawerOutput(origColorsB, standardBlock, wLine, 'lineBrightness', standardBlock, standardBlock);
+    drawerOutput(conf.origColorsL, standardBlock, wLine, 'lineLightness', standardBlock, standardBlock);
+    drawerOutput(conf.origColorsB, standardBlock, wLine, 'lineBrightness', standardBlock, standardBlock);
   }
 }
 
