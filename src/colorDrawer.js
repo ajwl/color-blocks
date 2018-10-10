@@ -37,10 +37,12 @@ export const drawerOutput = (origColors, height, width, id, blockHeight, blockWi
 export const canvasSetUp = (id, h, w) => {
   const container = document.getElementById(id);
   const cvs = document.createElement('canvas');
-  const dlButton = document.createElement('p')
-  dlButton.innerHtml = `<a id="${id}-download">Download</a> sorted by ${id}`;
+  console.log(container);
+  if(container.querySelector("a")) {
+    const dlButton = container.querySelector("a")
+    dlButton.textContent = `Download sorted by ${id}`;
+  }
   container.appendChild(cvs);
-  container.appendChild(dlButton);
   cvs.height = h;
   cvs.width = w;
   return cvs.getContext('2d');
