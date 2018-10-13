@@ -3,7 +3,6 @@ import {canvasSetUp, drawerOutput} from "./colorDrawer.js"
 import {scale, findBlockNumber} from "./utils.js"
 import './styles.css'
 
-// https://ourcodeworld.com/articles/read/185/how-to-get-the-pixel-color-from-a-canvas-on-click-or-mouse-event-with-javascript
 const maxHeight = 400;
 const maxWidth = 400;
 const standardBlock = 25;
@@ -13,6 +12,11 @@ const uploadLabel = document.querySelector('label.photo');
 const windowWidth = window.outerWidth;
 
 const fileSelector = () => {
+
+  //clear mounted files
+  const imageHolder = document.getElementById('image-holder');
+  imageHolder.innerHtml = "";
+
   const fileInput = document.getElementById('photo-submitter');
   fileInput.addEventListener(
     'change',
@@ -39,6 +43,10 @@ const mountFile = (file, lineOnly) => {
   img.crossorigin = 'anonymous';
   img.correctOrientation = true;
 
+  //clear file input
+  const fileInput = document.getElementById('photo-submitter');
+  fileInput.value = null;
+
   img.onload = () => {
     let [w, h] = scale(img.width, img.height, maxWidth, maxHeight)
     ctx.drawImage(img, 0, 0, w, h);
@@ -55,9 +63,11 @@ const drawer = (ctx, filename, conf) => {
     'click',
     () => {
         if(conf.lineOnly) {
-          drawerAll(ctx, filename, conf)
-        } else {
           drawerLineOnly(ctx, filename, conf)
+          mainBox.classList.add('is-multiple');
+        } else {
+          drawerAll(ctx, filename, conf)
+          mainBox.classList.remove('is-multiple');
         }
     },
     false
@@ -92,19 +102,23 @@ const showColourOptions = () => {
 const createNewCanvases = (conf) => {
   let wLine = findBlockNumber(conf.w, conf.h, standardBlock) * standardBlock;
 
+  console.log("colours B", conf.origColorsB);
+
   if(conf.lineOnly){
-      drawerOutput(conf.origColorsL, standardBlock, wLine, 'lineLightness', standardBlock, standardBlock);
+      drawerOutput(conf.origColorsL, standardBlock, wLine, 'lineLightness', standardBlock);
   } else {
     // block canvases
-    drawerOutput(conf.origColorsL, conf.h, conf.w, 'blockLightness', standardBlock, standardBlock);
-    drawerOutput(conf.origColorsB, conf.h, conf.w, 'blockBrightness', standardBlock, standardBlock);
+    drawerOutput(conf.origColorsL, conf.h, conf.w, 'blockLightness', standardBlock);
+    drawerOutput(conf.origColorsB, conf.h, conf.w, 'blockBrightness', standardBlock);
 
     // line canvases
-    drawerOutput(conf.origColorsL, standardBlock, wLine, 'lineLightness', standardBlock, standardBlock);
-    drawerOutput(conf.origColorsB, standardBlock, wLine, 'lineBrightness', standardBlock, standardBlock);
+    drawerOutput(conf.origColorsL, standardBlock, wLine, 'lineLightness', standardBlock);
+    drawerOutput(conf.origColorsB, standardBlock, wLine, 'lineBrightness', standardBlock);
   }
 }
 
-export const init = () => {
+const init = () => {
   fileSelector();
 }
+
+init();

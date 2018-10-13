@@ -71,11 +71,19 @@ input[type=file]:hover + label.photo {
   display: block;
 }
 
+.is-multiple.get-colours .block,
+.is-multiple.get-colours #lineBrightness {
+  display: none;
+}
+
+.get-colours #lineBrightness {
+  display: block;
+}
+
 .container-block {
   display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  margin-bottom: .5em;
+  flex-direction: column;
+  margin-bottom: 1em;
 }
 
 .container-line {

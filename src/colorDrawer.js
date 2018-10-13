@@ -1,6 +1,6 @@
 import {setupDownloadButton} from "./filehandler.js"
 
-export const drawerOutput = (origColors, height, width, id, blockHeight, blockWidth, filename) => {
+export const drawerOutput = (origColors, height, width, id, blockSide, filename) => {
   let ctx = canvasSetUp(id, height, width);
   let x = 0;
   let y = 0;
@@ -8,11 +8,11 @@ export const drawerOutput = (origColors, height, width, id, blockHeight, blockWi
   let xStartPoints = []
   let yStartPoints = []
 
-  for(let i = 0; i < height; i += blockHeight){
+  for(let i = 0; i < height; i += blockSide){
     yStartPoints.push(i)
   }
 
-  for(let i = 0; i < width; i += blockWidth){
+  for(let i = 0; i < width; i += blockSide){
     xStartPoints.push(i)
   }
 
@@ -24,7 +24,7 @@ export const drawerOutput = (origColors, height, width, id, blockHeight, blockWi
   },[])
 
   allStartPoints.forEach((coord, i) => {
-      ctx.fillRect(coord[0], coord[1], blockWidth, blockHeight)
+      ctx.fillRect(coord[0], coord[1], blockSide, blockSide)
       if(origColors[i]){
         ctx.fillStyle = `rgb(${origColors[i].r}, ${origColors[i].g}, ${origColors[i].b})`
       } else {
