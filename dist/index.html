@@ -8,16 +8,16 @@
   <body>
     <main class="no-photo">
       <h1>Color blocks</h1>
-      <p>This app samples and sorts colours in photographs.</p>
+      <p>This app samples and sorts colors in photographs.</p>
       <p>It was created for the Solistice to Solistice project</p>
 
       <div class="upload-wrapper">
         <input type="file" id="photo-submitter" name="file" multiple="false" accept="image/*">
-        <label class="photo" for="photo-submitter">1. Upload one or more photo</label>
+        <label class="photo" for="photo-submitter">Upload one or more photos</label>
       </div>
 
       <div class="get-colours-wrapper">
-        <button id="run-analysis">2. Get colours </button>
+        <p>Colors appear below. If you upload multiple pictures only lines sorted by lightness will show. </p>
       </div>
 
       <div class="container-block">
@@ -26,21 +26,17 @@
 
       <div class="container-block">
         <div id="blockLightness" class="canvas-holder block">
-          <p><a id="blockLightness-download"></a></p>
         </div>
 
         <div id="blockBrightness" class="canvas-holder block">
-          <p><a id="blockBrightness-download"></a></p>
         </div>
       </div>
 
       <div class="container-line">
         <div id="lineLightness" class="canvas-holder line">
-          <p><a id="lineLightness-download"></a>
         </div>
 
         <div id="lineBrightness" class="canvas-holder line">
-          <p><a id="lineBrightness-download"></a><p>
         </div>
       </div>
 

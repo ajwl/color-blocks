@@ -1,7 +1,7 @@
 import {setupDownloadButton} from "./filehandler.js"
 
 export const drawerOutput = (origColors, height, width, id, blockSide, filename) => {
-  let ctx = canvasSetUp(id, height, width);
+  let {ctx, dlButton} = canvasSetUp(id, height, width);
   let x = 0;
   let y = 0;
 
@@ -31,19 +31,26 @@ export const drawerOutput = (origColors, height, width, id, blockSide, filename)
         ctx.fillStyle = 'white';
       }
   })
-  setupDownloadButton(id, filename);
+  if(dlButton){
+    setupDownloadButton(dlButton, id, filename);
+  }
 }
 
 export const canvasSetUp = (id, h, w) => {
   const container = document.getElementById(id);
   const cvs = document.createElement('canvas');
-  console.log(container);
-  if(container.querySelector("a")) {
-    const dlButton = container.querySelector("a")
-    dlButton.textContent = `Download sorted by ${id}`;
-  }
-  container.appendChild(cvs);
   cvs.height = h;
   cvs.width = w;
-  return cvs.getContext('2d');
+  container.appendChild(cvs);
+
+  if(container.classList.contains('canvas-holder')){
+    const dlButton = document.createElement('a');
+    dlButton.id = `download-${id}`
+    dlButton.textContent = `Download - ${id}`
+    container.appendChild(dlButton);
+    return {ctx: cvs.getContext('2d'), dlButton }
+  }
+  else {
+    return {ctx: cvs.getContext('2d'), dlButton: null}
+  }
 }
