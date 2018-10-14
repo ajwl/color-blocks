@@ -46,10 +46,6 @@ const mountFile = (file, lineOnly) => {
   img.crossorigin = 'anonymous';
   img.correctOrientation = true;
 
-  //clear file input
-  const fileInput = document.getElementById('photo-submitter');
-  fileInput.files = null;
-
   img.onload = () => {
     let [w, h] = scale(img.width, img.height, maxWidth, maxHeight)
     ctx.drawImage(img, 0, 0, w, h);
