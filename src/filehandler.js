@@ -1,17 +1,14 @@
 
 
-export const setupDownloadButton = (id, filename) => {
-  const link = document.getElementById(`${id}-download`);
-
-  link.addEventListener(
+export const setupDownloadButton = (dlButton, id, filename) => {
+  dlButton.addEventListener(
     'click',
     () => {
-      const canvas = document.getElementById(`${id}`);
-      link.href = canvas.toDataURL();
-      link.download = `${filename}-${id}`;
+      const canvas = document.getElementById(`${id}`).querySelector('canvas');
+      dlButton.href = canvas.toDataURL();
+      dlButton.download = `${filename}-${id}`;
     },
     false
   );
-
-  link.classList.add('available');
+  dlButton.classList.add('available');
 }
