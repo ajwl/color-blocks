@@ -1,47 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title> Color Blocks </title>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A colour sampler and sorter">
-  </head>
-  <body>
-    <main class="no-photo">
-      <h1>Color blocks</h1>
-      <p>This app samples and sorts colors in photographs.</p>
-      <p>It was created for the Solistice to Solistice project, by Katherine Leedale.</p>
 
-      <div class="upload-wrapper">
-        <input type="file" id="photo-submitter" name="file" multiple="false" accept="image/*">
-        <label class="photo" for="photo-submitter">Upload one or more photos</label>
+<head>
+  <title> Color Blocks </title>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A colour sampler and sorter">
+</head>
+
+<body>
+  <main class="no-photo">
+    <h1 class="rainbow-text">COLOR BLOCKS</h1>
+    <p>This app samples and sorts colors in photographs.</p>
+    <p>It was created for the Solistice to Solistice project, by Katherine Leedale.</p>
+
+    <div class="upload-wrapper">
+      <input type="file" id="photo-submitter" name="file" multiple="false" accept="image/*">
+      <label class="photo" for="photo-submitter">Upload one or more photos</label>
+    </div>
+
+    <div class="get-colours-wrapper">
+      <p>Colors appear below. If you upload multiple pictures only lines sorted by lightness will show. </p>
+    </div>
+
+    <div class="container-block">
+      <div id="image-holder"></div>
+    </div>
+
+    <div class="container-block">
+      <div id="blockLightness" class="canvas-holder block">
       </div>
 
-      <div class="get-colours-wrapper">
-        <p>Colors appear below. If you upload multiple pictures only lines sorted by lightness will show. </p>
+      <div id="blockBrightness" class="canvas-holder block">
+      </div>
+    </div>
+
+    <div class="container-line">
+      <div id="lineLightness" class="canvas-holder line">
       </div>
 
-      <div class="container-block">
-        <div id="image-holder"></div>
+      <div id="lineBrightness" class="canvas-holder line">
       </div>
+    </div>
 
-      <div class="container-block">
-        <div id="blockLightness" class="canvas-holder block">
-        </div>
+    <small> A collaboration between leedale and ajwl - code on <a href="https://github.com/ajwl/color-blocks"
+        target="_blank">github</a></small>
+  </main>
+  <script type="text/javascript" src="./output.js"></script>
+</body>
 
-        <div id="blockBrightness" class="canvas-holder block">
-        </div>
-      </div>
-
-      <div class="container-line">
-        <div id="lineLightness" class="canvas-holder line">
-        </div>
-
-        <div id="lineBrightness" class="canvas-holder line">
-        </div>
-      </div>
-
-      <small> A collaboration between leedale and ajwl - code on <a href="https://github.com/ajwl/color-blocks" target="_blank">github</a></small>
-    </main>
-    <script type="text/javascript" src="./output.js"></script>
-  </body>
 </html>

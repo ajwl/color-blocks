@@ -8,14 +8,33 @@ canvas {
   margin-top: 1em;
 }
 
+main {
+  padding-left: 6px; 
+}
+
+main h1,
+main p,
+main small {
+  padding-left: 6px;
+}
+
+
 h1 {
-  color: red;
+  font-size: 40px;
+}
+
+.rainbow-text {
+  background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  color:transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 /* Buttons and actions */
 div.upload-wrapper {
   display: block;
-  margin-bottom: .5em;
+  margin-top: 2em;
 }
 
 div.upload-wrapper input[type=file] {
@@ -27,31 +46,26 @@ div.upload-wrapper input[type=file] {
   opacity: 0;
 }
 
-label.photo,
-button#run-analysis {
+  
+label.photo {
   padding: .5em;
   font-weight: 500;
-  font-size: 1.1em;
+  font-size: 1.5em;
   cursor: pointer;
   margin-bottom: 1em;
+  color: black;
+  min-width: 200px;
+  opacity: 0.7;
+  border: 2px solid #000;
+  border-radius: 15px;
+  background: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  background: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
 }
 
-button#run-analysis {
-  background-color: red;
-  color: white;
-}
-button#run-analysis:hover{
-  background-color: #bd2c23;
-}
-
-label.photo {
-  background-color: purple;
-  color: white;
-  line-height: 2.2em;
-}
 input[type=file]:hover + label.photo {
   background-color: #3e153e;
   cursor: pointer;
+  opacity: 1;
 }
 
 /* Body styles */

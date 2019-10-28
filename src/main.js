@@ -1,6 +1,7 @@
-import {getPixelData} from "./colourGetter.js"
-import {canvasSetUp, drawerOutput} from "./colorDrawer.js"
-import {scale, findBlockNumber} from "./utils.js"
+import { getPixelData } from "./colourGetter.js"
+import { canvasSetUp } from "./canvasSetup"
+import { drawerOutput } from "./colorDrawer"
+import { scale, findBlockNumber } from "./utils.js"
 import './styles.css'
 
 const maxHeight = 400;
@@ -29,6 +30,9 @@ const checkFiles = (e) => {
   const blocks = document.querySelectorAll('.canvas-holder');
   blocks.forEach(b => b.innerHTML = "");
 
+  //clear download? 
+  //To release an object URL, call revokeObjectURL().
+
   let submitted = Array.from(e.target.files);
 
   let isMultiple = submitted.length > 1;
@@ -40,8 +44,7 @@ const checkFiles = (e) => {
 
 const mountFile = (file, lineOnly) => {
   let filename = file.name;
-  let reader  = new FileReader();
-  let {ctx, dlButton} = canvasSetUp('image-holder', maxHeight, maxWidth);
+  let { ctx, _ } = canvasSetUp('image-holder', maxHeight, maxWidth);
   let img = new Image();
   img.crossorigin = 'anonymous';
   img.correctOrientation = true;
@@ -50,14 +53,16 @@ const mountFile = (file, lineOnly) => {
     let [w, h] = scale(img.width, img.height, maxWidth, maxHeight)
     ctx.drawImage(img, 0, 0, w, h);
     URL.revokeObjectURL(img.src)
-    onGetColours(ctx, filename, {w, h, lineOnly})
+    onGetColours(ctx, filename, { w, h, lineOnly })
     mainBox.classList.add('photo-uploaded');
   }
   img.src = URL.createObjectURL(file);
+  URL.revokeObjectURL(file);
+
 }
 
 const onGetColours = (ctx, filename, conf) => {
-  if(conf.lineOnly) {
+  if (conf.lineOnly) {
     drawerLineOnly(ctx, filename, conf)
     mainBox.classList.add('is-multiple');
   } else {
@@ -94,8 +99,8 @@ const showColourOptions = () => {
 const createNewCanvases = (conf, origColorsL, origColorsB) => {
   const wLine = findBlockNumber(conf.w, conf.h, standardBlock) * standardBlock;
 
-  if(conf.lineOnly){
-      drawerOutput(origColorsL, standardBlock, wLine, 'lineLightness', standardBlock, conf.filename);
+  if (conf.lineOnly) {
+    drawerOutput(origColorsL, standardBlock, wLine, 'lineLightness', standardBlock, conf.filename);
   } else {
     // block canvases
     drawerOutput(origColorsL, conf.h, conf.w, 'blockLightness', standardBlock, conf.filename);
